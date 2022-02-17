@@ -90,5 +90,7 @@ busybox sidecar-nginx
 
 ```bash
 oc delete namespace sidecar-injector
+oc delete namespace injection
+
 oc delete MutatingWebhookConfiguration/sidecar-injector-webhook-cfg
 ```
