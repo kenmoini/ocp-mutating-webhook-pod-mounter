@@ -1,1 +1,2 @@
 server
+openshift/mutatingwebhook-ca-bundle.yml

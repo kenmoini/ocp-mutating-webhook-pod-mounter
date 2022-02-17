@@ -26,8 +26,10 @@ WORKDIR /
 
 COPY --from=builder /workspace/server .
 
+RUN mkdir -p /etc/webhook/{config,certs} && chown -R 65532:65532 /etc/webhook && chmod -R 0777 /etc/webhook
+
 USER 65532:65532
 
 EXPOSE 8443
 
-#ENTRYPOINT ["/manager"]
+ENTRYPOINT ["/server"]
