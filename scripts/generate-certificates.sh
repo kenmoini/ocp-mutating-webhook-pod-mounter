@@ -73,6 +73,8 @@ subjectAltName = @alt_names
 DNS.1 = ${service}
 DNS.2 = ${service}.${namespace}
 DNS.3 = ${service}.${namespace}.svc
+DNS.4 = ${service}.${namespace}.cluster.local
+DNS.5 = ${service}.${namespace}.svc.cluster.local
 EOF
 
 openssl genrsa -out "${tmpdir}"/server-key.pem 2048
@@ -131,3 +133,5 @@ oc create secret generic ${secret} \
     --from-file=cert.pem="${tmpdir}"/server-cert.pem \
     --dry-run=client -o yaml |
   oc -n ${namespace} apply -f -
+
+rm -rf ${tmpdir}
