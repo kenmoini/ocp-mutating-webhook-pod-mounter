@@ -55,5 +55,6 @@ jobs:
       with:
         context: .
         push: true
+        file: Containerfile
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
