@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/kenmoini/ocp-mutating-webhook-pod-mounter/pkg/admission"
 	"github.com/sirupsen/logrus"
@@ -55,11 +56,11 @@ func main() {
 		//cert := "/etc/admission-webhook/tls/tls.crt"
 		cert := parameters.certFile
 		key := parameters.keyFile
-		logrus.Print("Listening on port " + string(parameters.port) + "...")
-		logrus.Fatal(http.ListenAndServeTLS(":"+string(parameters.port), cert, key, nil))
+		logrus.Print("Listening on port " + strconv.Itoa(parameters.port) + "...")
+		logrus.Fatal(http.ListenAndServeTLS(":"+strconv.Itoa(parameters.port), cert, key, nil))
 	} else {
-		logrus.Print("Listening on port " + string(parameters.port) + "...")
-		logrus.Fatal(http.ListenAndServe(":"+string(parameters.port), nil))
+		logrus.Print("Listening on port " + strconv.Itoa(parameters.port) + "...")
+		logrus.Fatal(http.ListenAndServe(":"+strconv.Itoa(parameters.port), nil))
 	}
 }
 
