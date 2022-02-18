@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"net/http"
 	"os"
@@ -10,10 +11,38 @@ import (
 	"github.com/kenmoini/ocp-mutating-webhook-pod-mounter/pkg/admission"
 	"github.com/sirupsen/logrus"
 	admissionv1 "k8s.io/api/admission/v1"
+	corev1 "k8s.io/api/core/v1"
 )
+
+// Webhook Server parameters
+type WhSvrParameters struct {
+	port           int    // webhook server port
+	certFile       string // path to the x509 certificate for https
+	keyFile        string // path to the x509 private key matching `CertFile`
+	sidecarCfgFile string // path to sidecar injector configuration file
+}
+
+type Config struct {
+	Containers []corev1.Container `yaml:"containers"`
+	Volumes    []corev1.Volume    `yaml:"volumes"`
+}
 
 func main() {
 	setLogger()
+
+	var parameters WhSvrParameters
+
+	// get command line parameters
+	flag.IntVar(&parameters.port, "port", 8443, "Webhook server port.")
+	flag.StringVar(&parameters.certFile, "tlsCertFile", "/etc/webhook/certs/cert.pem", "File containing the x509 Certificate for HTTPS.")
+	flag.StringVar(&parameters.keyFile, "tlsKeyFile", "/etc/webhook/certs/key.pem", "File containing the x509 private key to --tlsCertFile.")
+	flag.StringVar(&parameters.sidecarCfgFile, "sidecarCfgFile", "/etc/webhook/config/sidecarconfig.yaml", "File containing the mutation configuration.")
+	flag.Parse()
+
+	//sidecarConfig, err := loadConfig(parameters.sidecarCfgFile)
+	//if err != nil {
+	//	glog.Errorf("Failed to load configuration: %v", err)
+	//}
 
 	// handle our core application
 	http.HandleFunc("/validate-pods", ServeValidatePods)
@@ -23,13 +52,14 @@ func main() {
 	// start the server
 	// listens to clear text http on port 8080 unless TLS env var is set to "true"
 	if os.Getenv("TLS") == "true" {
-		cert := "/etc/admission-webhook/tls/tls.crt"
-		key := "/etc/admission-webhook/tls/tls.key"
-		logrus.Print("Listening on port 8443...")
-		logrus.Fatal(http.ListenAndServeTLS(":8443", cert, key, nil))
+		//cert := "/etc/admission-webhook/tls/tls.crt"
+		cert := parameters.certFile
+		key := parameters.keyFile
+		logrus.Print("Listening on port " + string(parameters.port) + "...")
+		logrus.Fatal(http.ListenAndServeTLS(":"+string(parameters.port), cert, key, nil))
 	} else {
-		logrus.Print("Listening on port 8080...")
-		logrus.Fatal(http.ListenAndServe(":8080", nil))
+		logrus.Print("Listening on port " + string(parameters.port) + "...")
+		logrus.Fatal(http.ListenAndServe(":"+string(parameters.port), nil))
 	}
 }
 

@@ -13,6 +13,7 @@ oc new-project sidecar-injector
 2. Deploy resources:
 
 ```bash
+oc create -n sidecar-injector -f openshift/
 oc create -n sidecar-injector -f openshift/nginx-configmap.yml
 oc create -n sidecar-injector -f openshift/configmap-webhook-config.yml
 oc create -n sidecar-injector -f openshift/deployment-webhook-svc.yml
