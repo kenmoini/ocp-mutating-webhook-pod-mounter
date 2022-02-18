@@ -25,8 +25,8 @@ func main() {
 	if os.Getenv("TLS") == "true" {
 		cert := "/etc/admission-webhook/tls/tls.crt"
 		key := "/etc/admission-webhook/tls/tls.key"
-		logrus.Print("Listening on port 443...")
-		logrus.Fatal(http.ListenAndServeTLS(":443", cert, key, nil))
+		logrus.Print("Listening on port 8443...")
+		logrus.Fatal(http.ListenAndServeTLS(":8443", cert, key, nil))
 	} else {
 		logrus.Print("Listening on port 8080...")
 		logrus.Fatal(http.ListenAndServe(":8080", nil))
