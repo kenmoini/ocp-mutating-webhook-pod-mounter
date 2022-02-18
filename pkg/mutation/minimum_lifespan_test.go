@@ -20,7 +20,7 @@ func TestMinLifespanTolerationsNoLabel(t *testing.T) {
 			}},
 			Tolerations: []corev1.Toleration{
 				{
-					Key:      "acme.com/lifespan-remaining",
+					Key:      "polyglot.systems/lifespan-remaining",
 					Operator: corev1.TolerationOpExists,
 					Effect:   corev1.TaintEffectNoSchedule,
 				},
@@ -53,7 +53,7 @@ func TestMinLifespanTolerationsLabel(t *testing.T) {
 		ObjectMeta: v1.ObjectMeta{
 			Name: "lifespan",
 			Labels: map[string]string{
-				"acme.com/lifespan-requested": "7",
+				"polyglot.systems/lifespan-requested": "7",
 			},
 		},
 		Spec: corev1.PodSpec{
@@ -68,49 +68,49 @@ func TestMinLifespanTolerationsLabel(t *testing.T) {
 					Effect:   corev1.TaintEffectNoSchedule,
 				},
 				{
-					Key:      "acme.com/lifespan-remaining",
+					Key:      "polyglot.systems/lifespan-remaining",
 					Operator: corev1.TolerationOpEqual,
 					Effect:   corev1.TaintEffectNoSchedule,
 					Value:    "14",
 				},
 				{
-					Key:      "acme.com/lifespan-remaining",
+					Key:      "polyglot.systems/lifespan-remaining",
 					Operator: corev1.TolerationOpEqual,
 					Effect:   corev1.TaintEffectNoSchedule,
 					Value:    "13",
 				},
 				{
-					Key:      "acme.com/lifespan-remaining",
+					Key:      "polyglot.systems/lifespan-remaining",
 					Operator: corev1.TolerationOpEqual,
 					Effect:   corev1.TaintEffectNoSchedule,
 					Value:    "12",
 				},
 				{
-					Key:      "acme.com/lifespan-remaining",
+					Key:      "polyglot.systems/lifespan-remaining",
 					Operator: corev1.TolerationOpEqual,
 					Effect:   corev1.TaintEffectNoSchedule,
 					Value:    "11",
 				},
 				{
-					Key:      "acme.com/lifespan-remaining",
+					Key:      "polyglot.systems/lifespan-remaining",
 					Operator: corev1.TolerationOpEqual,
 					Effect:   corev1.TaintEffectNoSchedule,
 					Value:    "10",
 				},
 				{
-					Key:      "acme.com/lifespan-remaining",
+					Key:      "polyglot.systems/lifespan-remaining",
 					Operator: corev1.TolerationOpEqual,
 					Effect:   corev1.TaintEffectNoSchedule,
 					Value:    "9",
 				},
 				{
-					Key:      "acme.com/lifespan-remaining",
+					Key:      "polyglot.systems/lifespan-remaining",
 					Operator: corev1.TolerationOpEqual,
 					Effect:   corev1.TaintEffectNoSchedule,
 					Value:    "8",
 				},
 				{
-					Key:      "acme.com/lifespan-remaining",
+					Key:      "polyglot.systems/lifespan-remaining",
 					Operator: corev1.TolerationOpEqual,
 					Effect:   corev1.TaintEffectNoSchedule,
 					Value:    "7",
@@ -123,7 +123,7 @@ func TestMinLifespanTolerationsLabel(t *testing.T) {
 		ObjectMeta: v1.ObjectMeta{
 			Name: "lifespan",
 			Labels: map[string]string{
-				"acme.com/lifespan-requested": "7",
+				"polyglot.systems/lifespan-requested": "7",
 			},
 		},
 		Spec: corev1.PodSpec{
@@ -159,7 +159,7 @@ func TestMinLifespanTolerationsIdempotence(t *testing.T) {
 			}},
 			Tolerations: []corev1.Toleration{
 				{
-					Key:      "acme.com/lifespan-remaining",
+					Key:      "polyglot.systems/lifespan-remaining",
 					Operator: corev1.TolerationOpExists,
 					Effect:   corev1.TaintEffectNoSchedule,
 				},

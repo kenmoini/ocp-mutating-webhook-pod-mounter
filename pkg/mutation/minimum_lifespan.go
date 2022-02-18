@@ -25,8 +25,8 @@ func (mpl minLifespanTolerations) Name() string {
 // Mutate returns a new mutated pod according to lifespan tolerations rules
 func (mpl minLifespanTolerations) Mutate(pod *corev1.Pod) (*corev1.Pod, error) {
 	const (
-		lifespanLabel = "acme.com/lifespan-requested"
-		taintKey      = "acme.com/lifespan-remaining"
+		lifespanLabel = "polyglot.systems/lifespan-requested"
+		taintKey      = "polyglot.systems/lifespan-remaining"
 		taintMaxAge   = 14
 	)
 

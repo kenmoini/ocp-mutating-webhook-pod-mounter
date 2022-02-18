@@ -40,7 +40,7 @@ func pod() *corev1.Pod {
 		ObjectMeta: v1.ObjectMeta{
 			Name: "lifespan",
 			Labels: map[string]string{
-				"acme.com/lifespan-requested": "7",
+				"polyglot.systems/lifespan-requested": "7",
 			},
 		},
 		Spec: corev1.PodSpec{
@@ -58,14 +58,14 @@ func patch() string {
 			{"name":"KUBE","value":"true"}
 		]},
 		{"op":"add","path":"/spec/tolerations","value":[
-			{"effect":"NoSchedule","key":"acme.com/lifespan-remaining","operator":"Equal","value":"14"},
-			{"effect":"NoSchedule","key":"acme.com/lifespan-remaining","operator":"Equal","value":"13"},
-			{"effect":"NoSchedule","key":"acme.com/lifespan-remaining","operator":"Equal","value":"12"},
-			{"effect":"NoSchedule","key":"acme.com/lifespan-remaining","operator":"Equal","value":"11"},
-			{"effect":"NoSchedule","key":"acme.com/lifespan-remaining","operator":"Equal","value":"10"},
-			{"effect":"NoSchedule","key":"acme.com/lifespan-remaining","operator":"Equal","value":"9"},
-			{"effect":"NoSchedule","key":"acme.com/lifespan-remaining","operator":"Equal","value":"8"},
-			{"effect":"NoSchedule","key":"acme.com/lifespan-remaining","operator":"Equal","value":"7"}
+			{"effect":"NoSchedule","key":"polyglot.systems/lifespan-remaining","operator":"Equal","value":"14"},
+			{"effect":"NoSchedule","key":"polyglot.systems/lifespan-remaining","operator":"Equal","value":"13"},
+			{"effect":"NoSchedule","key":"polyglot.systems/lifespan-remaining","operator":"Equal","value":"12"},
+			{"effect":"NoSchedule","key":"polyglot.systems/lifespan-remaining","operator":"Equal","value":"11"},
+			{"effect":"NoSchedule","key":"polyglot.systems/lifespan-remaining","operator":"Equal","value":"10"},
+			{"effect":"NoSchedule","key":"polyglot.systems/lifespan-remaining","operator":"Equal","value":"9"},
+			{"effect":"NoSchedule","key":"polyglot.systems/lifespan-remaining","operator":"Equal","value":"8"},
+			{"effect":"NoSchedule","key":"polyglot.systems/lifespan-remaining","operator":"Equal","value":"7"}
 		]}
 ]`
 
