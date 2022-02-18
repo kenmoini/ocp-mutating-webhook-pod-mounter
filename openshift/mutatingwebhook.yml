@@ -1,24 +1,25 @@
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
-  name: sidecar-injector-webhook-cfg
+  name: sidecar-injector.polyglot.systems
   annotations:
     service.beta.openshift.io/inject-cabundle: "true"
     kubectl.kubernetes.io/last-applied-configuration: ""
   labels:
     app: sidecar-injector
 webhooks:
-- name: sidecar-injector.kenmoini.me
+- name: sidecar-injector.polyglot.systems
   clientConfig:
     service:
       name: sidecar-injector-webhook-svc
       namespace: sidecar-injector
-      path: "/mutate"
+      path: "/mutate-pods"
   rules:
   - operations: ["CREATE", "UPDATE"]
     apiGroups: [""]
     apiVersions: ["v1"]
     resources: ["pods"]
+    scope: "*"
   namespaceSelector:
     matchLabels:
       sidecar-injection: enabled

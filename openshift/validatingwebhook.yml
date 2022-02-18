@@ -1,0 +1,27 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: sidecar-injector.polyglot.systems
+  annotations:
+    service.beta.openshift.io/inject-cabundle: "true"
+    kubectl.kubernetes.io/last-applied-configuration: ""
+  labels:
+    app: sidecar-injector
+webhooks:
+  - name: sidecar-injector.polyglot.systems
+    clientConfig:
+      service:
+        name: sidecar-injector-webhook-svc
+        namespace: sidecar-injector
+        path: "/validate-pods"
+    rules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["pods"]
+        scope: "*"
+    namespaceSelector:
+      matchLabels:
+        sidecar-injection: enabled
+    sideEffects: None
+    admissionReviewVersions: ["v1"]
