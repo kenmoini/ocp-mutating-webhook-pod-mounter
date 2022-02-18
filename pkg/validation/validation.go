@@ -29,8 +29,8 @@ type validation struct {
 // ValidatePod returns true if a pod is valid
 func (v *Validator) ValidatePod(pod *corev1.Pod) (validation, error) {
 	var podName string
-	if pod.Name != "" {
-		podName = pod.Name
+	if pod.ObjectMeta.Name != "" {
+		podName = pod.ObjectMeta.Name
 	} else {
 		if pod.ObjectMeta.GenerateName != "" {
 			podName = pod.ObjectMeta.GenerateName

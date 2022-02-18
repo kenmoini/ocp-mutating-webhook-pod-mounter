@@ -27,7 +27,7 @@ func (n nameValidator) Name() string {
 func (n nameValidator) Validate(pod *corev1.Pod) (validation, error) {
 	badString := "offensive"
 
-	if strings.Contains(pod.Name, badString) {
+	if strings.Contains(pod.ObjectMeta.Name, badString) {
 		v := validation{
 			Valid:  false,
 			Reason: fmt.Sprintf("pod name contains %q", badString),
