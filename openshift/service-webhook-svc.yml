@@ -5,10 +5,12 @@ metadata:
   labels:
     app: sidecar-injector
   annotations:
+    kubectl.kubernetes.io/last-applied-configuration: ""
     service.beta.openshift.io/serving-cert-secret-name: service-serving-cert
 spec:
   ports:
   - port: 443
     targetPort: 8443
+    protocol: TCP
   selector:
     app: sidecar-injector

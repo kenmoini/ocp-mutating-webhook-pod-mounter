@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sidecar-injector-webhook-svc
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: ""
   labels:
     app: sidecar-injector
 spec:
@@ -14,6 +16,10 @@ spec:
       labels:
         app: sidecar-injector
     spec:
+      tolerations:
+        - key: polyglot.systems/lifespan-remaining
+          operator: Exists
+          effect: NoSchedule
       containers:
         - name: sidecar-injector
           image: quay.io/kenmoini/ocp-mutating-webhook-pod-mounter:latest
@@ -22,8 +28,6 @@ spec:
           - -sidecarCfgFile=/etc/webhook/config/sidecarconfig.yaml
           - -tlsCertFile=/etc/webhook/certs/tls.crt
           - -tlsKeyFile=/etc/webhook/certs/tls.key
-          - -alsologtostderr
-          - -v=4
           - 2>&1
           env:
           - name: TLS
