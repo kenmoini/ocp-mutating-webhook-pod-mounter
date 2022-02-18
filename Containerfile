@@ -11,7 +11,7 @@ COPY . /workspace/
 RUN go mod download
 
 # Build
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o server ./cmd
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o server .
 
 ## Distributed Container Layer
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.5

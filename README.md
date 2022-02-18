@@ -10,24 +10,7 @@ This repository provides the needed constructs for a MutatingWebHook that will a
 oc new-project sidecar-injector
 ```
 
-2. Create a signed cert/key pair and store it in a Kubernetes `secret` that will be consumed by sidecar injector deployment:
-
-```bash
-./scripts/generate-certificates.sh \
-  --service sidecar-injector-webhook-svc \
-  --secret sidecar-injector-webhook-certs \
-  --namespace sidecar-injector
-```
-
-3. Patch the `MutatingWebhookConfiguration` by set `caBundle` with correct value from Kubernetes cluster:
-
-```bash
-cat openshift/mutatingwebhook.yml | \
-  scripts/patch-ca-bundle.sh > \
-  openshift/mutatingwebhook-ca-bundle.yml
-```
-
-4. Deploy resources:
+2. Deploy resources:
 
 ```bash
 oc create -n sidecar-injector -f openshift/nginx-configmap.yml
