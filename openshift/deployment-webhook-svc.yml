@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sidecar-injector-webhook-svc
+  name: pki-injector-webhook-svc
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: ""
   labels:
-    app: sidecar-injector
+    app: pki-injector
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sidecar-injector
+      app: pki-injector
   template:
     metadata:
       labels:
-        app: sidecar-injector
+        app: pki-injector
     spec:
       tolerations:
         - key: polyglot.systems/lifespan-remaining
           operator: Exists
           effect: NoSchedule
       containers:
-        - name: sidecar-injector
+        - name: pki-injector
           image: quay.io/kenmoini/ocp-mutating-webhook-pod-mounter:latest
           imagePullPolicy: Always
           args:
-          - -sidecarCfgFile=/etc/webhook/config/sidecarconfig.yaml
+          - -sidecarCfgFile=/etc/webhook/config/config.yaml
           - -tlsCertFile=/etc/webhook/certs/tls.crt
           - -tlsKeyFile=/etc/webhook/certs/tls.key
           - 2>&1
@@ -55,4 +55,4 @@ spec:
           secretName: service-serving-cert
       - name: webhook-config
         configMap:
-          name: sidecar-injector-webhook-configmap
+          name: pki-injector-webhook-configmap

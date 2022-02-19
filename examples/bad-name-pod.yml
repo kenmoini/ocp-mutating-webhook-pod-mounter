@@ -1,0 +1,13 @@
+# From https://github.com/slackhq/simple-kubernetes-webhook/blob/main/dev/manifests/pods/bad-name.pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: offensive-pod
+spec:
+  containers:
+    - args:
+        - sleep
+        - "3600"
+      image: busybox
+      name: lifespan-offensive
+  restartPolicy: Always

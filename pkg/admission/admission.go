@@ -9,6 +9,7 @@ import (
 	"net/http"
 
 	"github.com/kenmoini/ocp-mutating-webhook-pod-mounter/pkg/mutation"
+	"github.com/kenmoini/ocp-mutating-webhook-pod-mounter/pkg/shared"
 	"github.com/kenmoini/ocp-mutating-webhook-pod-mounter/pkg/validation"
 	"github.com/sirupsen/logrus"
 	admissionv1 "k8s.io/api/admission/v1"
@@ -21,6 +22,7 @@ import (
 type Admitter struct {
 	Logger  *logrus.Entry
 	Request *admissionv1.AdmissionRequest
+	Config  *shared.Config
 }
 
 // MutatePodReview takes an admission request and mutates the pod within,

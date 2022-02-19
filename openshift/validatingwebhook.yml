@@ -1,18 +1,18 @@
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
-  name: sidecar-injector.polyglot.systems
+  name: pki-injector.polyglot.systems
   annotations:
     service.beta.openshift.io/inject-cabundle: "true"
     kubectl.kubernetes.io/last-applied-configuration: ""
   labels:
-    app: sidecar-injector
+    app: pki-injector
 webhooks:
-  - name: sidecar-injector.polyglot.systems
+  - name: pki-injector.polyglot.systems
     clientConfig:
       service:
-        name: sidecar-injector-webhook-svc
-        namespace: sidecar-injector
+        name: pki-injector-webhook-svc
+        namespace: pki-injector
         path: "/validate-pods"
     rules:
       - apiGroups: [""]

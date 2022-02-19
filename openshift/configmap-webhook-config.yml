@@ -1,21 +1,19 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: sidecar-injector-webhook-configmap
+  name: pki-injector-webhook-configmap
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: ""
 data:
-  sidecarconfig.yaml: |
-    containers:
-    - name: sidecar-nginx
-      image: nginx:1.12.2
-      imagePullPolicy: IfNotPresent
-      ports:
-      - containerPort: 80
-      volumeMounts:
-      - name: nginx-conf
-        mountPath: /etc/nginx
+  config.yaml: |
+    volumeMounts:
+    - name: trusted-ca
+      mountPath: /etc/pki/ca-trust/extracted/pem
+      readOnly: true
     volumes:
-    - name: nginx-conf
+    - name: trusted-ca
       configMap:
-        name: nginx-configmap
+        name: trusted-ca
+        items:
+          - key: ca-bundle.crt 
+            path: tls-ca-bundle.pem
