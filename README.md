@@ -1,6 +1,6 @@
 # DEPRECIATED - Use the [PodPreset Operator](https://github.com/redhat-cop/podpreset-webhook)
 
-This project was intending to be just a MutatingWebhook that would auto-mount a ConfigMap to Pods that contained a Root CA Bundle PEM and would then also bake a Java Keystore ConfigMap and attach it as well.
+This project was intended to be just a MutatingWebhook that would auto-mount a ConfigMap to Pods that contained a Root CA Bundle PEM and would then also bake a Java Keystore ConfigMap and attach it as well.
 
 Instead, you can simply create/sync the ConfigMaps then use the PodPreset Operator to auto-attach the Volumes and VolumeMounts pointing to the ConfigMaps.
 
@@ -73,7 +73,7 @@ spec:
             - while true; do sleep 30; done;
 ```
 
-Extra information around additional options for PKI in OpenShift here: https://kenmoini.com/post/2022/02/custom-root-ca-in-openshift/
+> Extra information around additional options for PKI in OpenShift here: https://kenmoini.com/post/2022/02/custom-root-ca-in-openshift/
 
 ---
 
