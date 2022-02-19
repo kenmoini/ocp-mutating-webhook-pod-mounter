@@ -73,6 +73,8 @@ spec:
             - while true; do sleep 30; done;
 ```
 
+Extra information around additional options for PKI in OpenShift here: https://kenmoini.com/post/2022/02/custom-root-ca-in-openshift/
+
 ---
 
 # OpenShift MutatingWebHook, PKI Mounter
