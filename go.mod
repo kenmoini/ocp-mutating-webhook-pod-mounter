@@ -6,7 +6,7 @@ require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/golang/glog v1.0.0
 	github.com/sirupsen/logrus v1.8.1
-	github.com/stretchr/testify v1.7.0
+	github.com/stretchr/testify v1.7.1
 	github.com/wI2L/jsondiff v0.1.1
 	gopkg.in/yaml.v2 v2.4.0
 	k8s.io/api v0.23.4
